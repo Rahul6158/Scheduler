@@ -10,13 +10,13 @@ st.write(works)
 
 # Modify the dataset
 st.write("## Modify Dataset")
-name = st.text_input("Enter name:")
-age = st.number_input("Enter age:")
-city = st.text_input("Enter city:")
-country = st.text_input("Enter country:")
+very_urgent = st.text_input("Very Urgent:")
+urgent = st.text_input("Urgent:")
+have_time = st.text_input("Have time:")
+no_due = st.text_input("No Due:")
 
 if st.button("Add Entry"):
-    new_entry = {'Name': name, 'Age': age, 'City': city, 'Country': country}
+    new_entry = {'Very-Urgent': very_urgent, 'Urgent': urgent, 'Have time': have_time, 'No-Due': no_due}
     works = works.append(new_entry, ignore_index=True)
     st.write("### Updated Dataset")
     st.write(works)
