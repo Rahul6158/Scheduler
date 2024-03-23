@@ -1,33 +1,50 @@
 import streamlit as st
 from datetime import datetime
 
-# Streamlit header
+# Header
+st.image("logo.jpg", width=100)
 st.title("Our Time Saver")
-st.image("logo.jpg")
 
-# Streamlit left frame
+# Left frame
 st.sidebar.title("Sticky Notes")
 notes = st.sidebar.text_area("Enter your note")
+time_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+st.sidebar.text(f"Current Time: {time_date}")
+if st.sidebar.button("Add Note"):
+    st.sidebar.markdown(f"- {notes} (Created on: {time_date})")
 
-# Streamlit right frame
-st.header("Notes")
-columns = st.columns([1, 1, 1, 1])
+# Right frame
+st.header("Sticky Notes Board")
+st.write("Drag and drop notes to the columns below:")
+very_urgent_notes = st.beta_container()
+urgent_notes = st.beta_container()
+have_time_notes = st.beta_container()
+no_due_notes = st.beta_container()
 
-# Handle notes drag and drop
-for column in columns:
-    with column:
-        st.subheader(column.title())
-        st.write("Drag your notes here")
+def show_notes(notes_container):
+    for note in notes_container:
+        st.write(note)
 
-        # Display notes dropped in the column
-        if st.session_state.get(column.title(), None):
-            for note in st.session_state[column.title()]:
-                st.write(f"- {note['text']} (Created on: {note['time']})")
-    
-    # Drop zone for notes
-    if st.session_state.get(column.title(), None) is None:
-        st.session_state[column.title()] = []
+st.text("")
+st.text("Drag your notes here:")
+notes_dragged = st.text_area("")
 
-    if st.sidebar.button(f"Add to {column.title()}"):
-        if notes:
-            st.session_state[column.title()].append({"text": notes, "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
+if st.button("Add Note"):
+    st.write(notes_dragged)
+
+# Display the columns with the notes
+with very_urgent_notes:
+    st.subheader("Very Urgent")
+    show_notes([])  # Add your very urgent notes here
+
+with urgent_notes:
+    st.subheader("Urgent")
+    show_notes([])  # Add your urgent notes here
+
+with have_time_notes:
+    st.subheader("Have Time")
+    show_notes([])  # Add your have time notes here
+
+with no_due_notes:
+    st.subheader("No Due")
+    show_notes([])  # Add your no due notes here
