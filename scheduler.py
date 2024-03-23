@@ -3,7 +3,7 @@ from datetime import datetime
 
 # Streamlit header
 st.title("Our Time Saver")
-st.image("logo.jpg", caption=None, width=None, use_column_width=False, clamp=False, channels='RGB', format='JPEG')
+st.image("logo.jpg")
 
 # Streamlit left frame
 st.sidebar.title("Sticky Notes")
