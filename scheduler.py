@@ -1,18 +1,12 @@
 import streamlit as st
 import pandas as pd
 
-# Sample dataset
-data = {
-    'Name': ['Alice', 'Bob', 'Charlie', 'David'],
-    'Age': [25, 30, 35, 40],
-    'City': ['New York', 'Los Angeles', 'Chicago', 'Houston'],
-    'Country': ['USA', 'USA', 'USA', 'USA']
-}
-df = pd.DataFrame(data)
+# Load the "works" dataset
+works = pd.read_csv("path_to_works_dataset.csv")
 
 # Display the dataset
-st.write("## Original Dataset")
-st.write(df)
+st.write("## Works Dataset")
+st.write(works)
 
 # Modify the dataset
 st.write("## Modify Dataset")
@@ -23,11 +17,11 @@ country = st.text_input("Enter country:")
 
 if st.button("Add Entry"):
     new_entry = {'Name': name, 'Age': age, 'City': city, 'Country': country}
-    df = df.append(new_entry, ignore_index=True)
+    works = works.append(new_entry, ignore_index=True)
     st.write("### Updated Dataset")
-    st.write(df)
+    st.write(works)
 
 # Save the modified dataset
 if st.button("Save Changes"):
-    df.to_csv("modified_dataset.csv", index=False)
+    works.to_csv("modified_works_dataset.csv", index=False)
     st.write("Changes saved successfully.")
