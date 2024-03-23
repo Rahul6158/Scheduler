@@ -1,39 +1,33 @@
 import streamlit as st
-from datetime import datetime
+import pandas as pd
 
-# Header
-st.image("logo.jpg", width=100)
-st.title("Our Time Saver")
+# Sample dataset
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+    'Age': [25, 30, 35, 40],
+    'City': ['New York', 'Los Angeles', 'Chicago', 'Houston'],
+    'Country': ['USA', 'USA', 'USA', 'USA']
+}
+df = pd.DataFrame(data)
 
-# Left frame
-st.sidebar.title("Sticky Notes")
-notes = st.sidebar.text_area("Enter your note")
-time_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-st.sidebar.text(f"Current Time: {time_date}")
-if st.sidebar.button("Add Note"):
-    st.sidebar.markdown(f"- {notes} (Created on: {time_date})")
+# Display the dataset
+st.write("## Original Dataset")
+st.write(df)
 
-# Right frame
-st.header("Sticky Notes Board")
-st.write("Drag and drop notes to the columns below:")
+# Modify the dataset
+st.write("## Modify Dataset")
+name = st.text_input("Enter name:")
+age = st.number_input("Enter age:")
+city = st.text_input("Enter city:")
+country = st.text_input("Enter country:")
 
-# Display the columns with the notes
-col1, col2, col3, col4 = st.beta_columns(4)
+if st.button("Add Entry"):
+    new_entry = {'Name': name, 'Age': age, 'City': city, 'Country': country}
+    df = df.append(new_entry, ignore_index=True)
+    st.write("### Updated Dataset")
+    st.write(df)
 
-with col1:
-    st.subheader("Very Urgent")
-    st.write("Note 1")
-    st.write("Note 2")
-
-with col2:
-    st.subheader("Urgent")
-    st.write("Note 3")
-
-with col3:
-    st.subheader("Have Time")
-    st.write("Note 4")
-    st.write("Note 5")
-
-with col4:
-    st.subheader("No Due")
-    st.write("Note 6")
+# Save the modified dataset
+if st.button("Save Changes"):
+    df.to_csv("modified_dataset.csv", index=False)
+    st.write("Changes saved successfully.")
