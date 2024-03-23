@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 
 # Header
-st.image("logo.jpg", width=100)
+st.image("circle-image.jpg", width=100)
 st.title("Our Time Saver")
 
 # Left frame
@@ -16,35 +16,24 @@ if st.sidebar.button("Add Note"):
 # Right frame
 st.header("Sticky Notes Board")
 st.write("Drag and drop notes to the columns below:")
-very_urgent_notes = st.beta_container()
-urgent_notes = st.beta_container()
-have_time_notes = st.beta_container()
-no_due_notes = st.beta_container()
-
-def show_notes(notes_container):
-    for note in notes_container:
-        st.write(note)
-
-st.text("")
-st.text("Drag your notes here:")
-notes_dragged = st.text_area("")
-
-if st.button("Add Note"):
-    st.write(notes_dragged)
 
 # Display the columns with the notes
-with very_urgent_notes:
+col1, col2, col3, col4 = st.beta_columns(4)
+
+with col1:
     st.subheader("Very Urgent")
-    show_notes([])  # Add your very urgent notes here
+    st.write("Note 1")
+    st.write("Note 2")
 
-with urgent_notes:
+with col2:
     st.subheader("Urgent")
-    show_notes([])  # Add your urgent notes here
+    st.write("Note 3")
 
-with have_time_notes:
+with col3:
     st.subheader("Have Time")
-    show_notes([])  # Add your have time notes here
+    st.write("Note 4")
+    st.write("Note 5")
 
-with no_due_notes:
+with col4:
     st.subheader("No Due")
-    show_notes([])  # Add your no due notes here
+    st.write("Note 6")
