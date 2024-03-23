@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 
 # Header
-st.image("circle-image.jpg", width=100)
+st.image("logo.jpg", width=100)
 st.title("Our Time Saver")
 
 # Left frame
