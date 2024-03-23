@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Load the "works" dataset
-works = pd.read_csv("path_to_works_dataset.csv")
+works = pd.read_csv("works.csv")
 
 # Display the dataset
 st.write("## Works Dataset")
